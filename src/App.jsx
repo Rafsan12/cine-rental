@@ -1,3 +1,4 @@
+import MovieList from "./components/Cine/MovieList";
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
 
@@ -8,6 +9,7 @@ function App() {
       <main>
         <div className="container grid lg:grid-cols-[218px_1fr] gap-[3.5rem]">
           <Sidebar />
+          <MovieList />
         </div>
       </main>
     </>
