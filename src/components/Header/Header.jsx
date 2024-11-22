@@ -1,14 +1,16 @@
 import { useContext, useState } from "react";
 import Moon from "../../assets/icons/moon.svg";
+import Sun from "../../assets/icons/sun.svg";
 import Logo from "../../assets/logo.svg";
 import Ring from "../../assets/ring.svg";
 import shoppingCart from "../../assets/shopping-cart.svg";
-import { MovieContext } from "../../context";
+import { MovieContext, ThemContext } from "../../context";
 import CartDetails from "../Cine/CartDetails";
 export default function Header() {
   const [showCart, setShowCart] = useState(false);
   const { cartData } = useContext(MovieContext);
   console.log(cartData);
+  const { darkMode, setDarkMode } = useContext(ThemContext);
 
   const handleCartShow = () => {
     setShowCart(true);
@@ -19,7 +21,6 @@ export default function Header() {
   };
   return (
     <>
-      const {cartData} = useContext(MovieContext);
       {showCart && (
         <CartDetails onClose={handleCartClose} cartData={cartData} />
       )}
@@ -40,10 +41,16 @@ export default function Header() {
             </li>
             <li>
               <a
+                onClick={() => setDarkMode((darkMode) => !darkMode)}
                 className="bg-primary/20 dark:bg-primary/[7%] rounded-lg backdrop-blur-[2px] p-1 inline-block"
                 href="#"
               >
-                <img src={Moon} width="24" height="24" alt="" />
+                <img
+                  src={darkMode ? Sun : Moon}
+                  width="24"
+                  height="24"
+                  alt=""
+                />
               </a>
             </li>
             <li>
@@ -53,6 +60,11 @@ export default function Header() {
                 href="#"
               >
                 <img src={shoppingCart} width="24" height="24" alt="" />
+                {cartData.length > 0 && (
+                  <span className="rounded-full absolute top-[-12px] left-[28px] bg-[#12CF6F] text-white text-center p-[2px] w-[30px] h-[30px]">
+                    {cartData.length}
+                  </span>
+                )}
               </a>
             </li>
           </ul>
